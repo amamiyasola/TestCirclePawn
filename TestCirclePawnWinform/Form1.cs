@@ -20,8 +20,19 @@ namespace TestCirclePawnWinform
 
             InitializeComponent();
             comboBox1.Items.Add(new MyObject() { Value = 1, Name = "三阶贝塞尔曲线" });
-            comboBox1.Items.Add(new MyObject() { Value = 2, Name = "样条插值曲线" });
+            comboBox1.Items.Add(new MyObject() { Value = 2, Name = "三阶贝塞尔曲线(新)" });
             comboBox1.SelectedIndex = 0;
+
+            MyObject myObject = new MyObject() { Name = $"(100,0)", Value = new PointD(100, 0) };
+            formPointsAdd.listBox1.Items.Add(myObject);
+            myObject = new MyObject() { Name = $"(92.3879,38.2683)", Value = new PointD(92.3879, 38.2683) };
+            formPointsAdd.listBox1.Items.Add(myObject);
+            myObject = new MyObject() { Name = $"(70.7107,70.7107)", Value = new PointD(70.7107, 70.7107) };
+            formPointsAdd.listBox1.Items.Add(myObject);
+            myObject = new MyObject() { Name = $"(38.2683,92.3879)", Value = new PointD(38.2683, 92.3879) };
+            formPointsAdd.listBox1.Items.Add(myObject);
+            myObject = new MyObject() { Name = $"(0,100)", Value = new PointD(0, 100) };
+            formPointsAdd.listBox1.Items.Add(myObject);
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -137,7 +148,19 @@ namespace TestCirclePawnWinform
             }
             else
             {
-
+                StringBuilder stringBuilder2 = new StringBuilder();
+                var img = new ImageHelp(512, 512);
+                img.DrawPoints(x_s, y_s, Brushes.Red);
+                List<PointD> points2 = new List<PointD>();
+                Bezier.createCurve(points, points.Length, out points2);
+                img.DrawPoints(points2.Select(p => p.X).ToArray(), points2.Select(p => p.Y).ToArray(), Brushes.Blue);
+                foreach (var point in points2)
+                {
+                    stringBuilder2.Append($"坐标=>x:{point.X},y:{point.Y}\r\n");
+                }
+                textBox1.Text = "";
+                textBox2.Text = stringBuilder2.ToString();
+                this.pictureBox1.Image = img._image;
             }
 
         }
