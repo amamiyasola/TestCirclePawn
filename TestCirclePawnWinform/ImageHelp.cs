@@ -12,6 +12,11 @@ namespace TestCirclePawnWinform
     public class ImageHelp
     {
         public Image _image;
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="width"></param>
+        /// <param name="height"></param>
         public ImageHelp(int width, int height)
         {
             _image = new Bitmap(width, height);
